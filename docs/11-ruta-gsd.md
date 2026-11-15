@@ -32,10 +32,12 @@ copilot
 /gsd-progress
 /gsd-plan-phase 1
 /gsd-execute-phase 1
-/gsd-verify-work
+/gsd-verify-work 1
 ```
 
 Si el starter provoca un flujo de **proyecto existente**, GSD ofrece `/gsd-onboard`; decidirlo en el ensayo docente con la versión instalada. Si el proyecto se divide en varias fases, prioriza RF-01 a RF-07 y registra las que no lleguen a implementarse. Confirma en `/gsd-help` la sintaxis de comandos de la versión instalada.
+
+**Importante:** `npm run setup` crea un repositorio Git independiente en el workspace. Comprueba `git rev-parse --show-toplevel`; GSD necesita poder registrar commits y no debe ejecutar dentro de la raíz del kit.
 
 ## 4. Validación
 

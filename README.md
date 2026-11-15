@@ -4,6 +4,17 @@
 
 **Una especificación. Dos frameworks. Un mismo desafío.** Laboratorio práctico para alumnos de Tajamar: todos parten del mismo documento funcional de **TaskForge**, todos usan **GitHub Copilot CLI** y cada alumno elige **Spec Kit** o **GSD Core**. El resultado se evalúa con criterios de aceptación comunes y una rúbrica de 100 puntos.
 
+## 🎭 Ensayo previo de los ponentes
+
+Antes del workshop, **Jorge (Spec Kit)** y **David (GSD Core)** realizan un ensayo completo y cronometrado con el mismo TaskForge. El generador `npm run setup` crea **workspaces Git independientes** para preservar la capacidad de GSD de hacer commits y para evitar contaminación entre casas.
+
+- [Protocolo de ensayo para ambos](docs/13-ensayo-ponentes.md)
+- [Guía de David: GSD Core](docs/14-ensayo-david-gsd.md)
+- [Guía de Jorge: Spec Kit](docs/15-ensayo-jorge-speckit.md)
+- [Plantilla de resultados del ensayo](results/plantilla-ensayo-ponentes.csv)
+
+**No subir soluciones de ensayo ni el cambio sorpresa a este repositorio público.**
+
 ![Game of Prompts: dos casas](assets/duel.svg)
 
 > **Importante:** aquí **no hay una aplicación resuelta**. El objetivo es que los estudiantes diseñen e implementen TaskForge con agentes. El cambio de requisitos del minuto 75 no está publicado aquí para preservar la dinámica.
