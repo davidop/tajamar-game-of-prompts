@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Game of Prompts | Marcador Tajamar</title>
+<style>
+:root{font-family:system-ui,Segoe UI,sans-serif;color:#1a2240;background:#f5f7fc}*{box-sizing:border-box}
+body{max-width:1200px;margin:0 auto;padding:36px 20px}h1{font-size:clamp(27px,4vw,48px);margin:3px 0}
+.sub{color:#65718b;margin:0 0 22px}.panel{background:white;border-radius:19px;padding:23px;border:1px solid #e3e8f2;box-shadow:0 5px 24px #2031540b;margin-bottom:18px}
+.columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.columns{grid-template-columns:1fr}}
+.house{border:1px solid #dfe5f0;padding:20px;border-radius:14px}.house b{font-size:20px}.house strong{font-size:46px;display:block}.house small{color:#66748a}
+label{font-size:13px;color:#50607d;display:grid;gap:5px}input,select{padding:10px 12px;border:1px solid #cbd4e4;border-radius:8px;font:inherit;min-width:0;width:100%}
+.form{display:grid;grid-template-columns:1.3fr 1fr repeat(6,minmax(75px,1fr));gap:8px;align-items:end}.form .actions{grid-column:1/-1;display:flex;gap:9px;margin-top:8px;flex-wrap:wrap}
+@media(max-width:1040px){.form{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:520px){.form{grid-template-columns:1fr 1fr}}
+button{border:0;border-radius:9px;padding:10px 14px;font-weight:700;cursor:pointer;background:#233e94;color:white}button.secondary{background:#e8edf7;color:#233e94}button.danger{background:#b83248}
+table{width:100%;border-collapse:collapse}th,td{padding:11px;border-bottom:1px solid #ebeff6;text-align:left}th{color:#697895;font-size:12px;white-space:nowrap}td{font-variant-numeric:tabular-nums}.over{overflow:auto}
+.pill{display:inline-block;border-radius:99px;padding:4px 9px;font-size:12px;font-weight:700}.spec{background:#e6efff;color:#2349a6}.gsd{background:#eaf8ef;color:#197a47}
+.bar{height:9px;background:#e4eaf2;border-radius:50px;overflow:hidden}.fill{height:100%;background:#5277e8}.disclaimer{color:#68758c;font-size:13px}
+</style></head><body>
+<p class="sub">TAJAMAR · LABORATORIO SDD · 120 MIN</p><h1>Game of Prompts 🛡️ ⚡</h1><p class="sub">Una especificación. Dos frameworks. Resultados medibles.</p>
+<div class="columns"><section class="house panel"><b>🛡️ Casa Spec Kit</b><strong id="specAvg">—</strong><small id="specCount">0 participantes</small><div class="bar"><div class="fill" id="specBar" style="width:0%"></div></div></section>
+<section class="house panel"><b>⚡ Casa GSD</b><strong id="gsdAvg">—</strong><small id="gsdCount">0 participantes</small><div class="bar"><div class="fill" id="gsdBar" style="width:0%;background:#25a568"></div></div></section></div>
+<section class="panel"><h2>Añadir resultado</h2><form class="form" id="entryForm">
+<label>Participante<input name="name" required placeholder="Alumno o equipo" maxlength="80"></label>
+<label>Casa<select name="house"><option value="Spec Kit">Spec Kit</option><option value="GSD">GSD</option></select></label>
+<label>RF base /40<input name="functional" type="number" min="0" max="40" value="0" required></label>
+<label>Calidad /15<input name="quality" type="number" min="0" max="15" value="0" required></label>
+<label>SDD /15<input name="process" type="number" min="0" max="15" value="0" required></label>
+<label>Cambio /15<input name="change" type="number" min="0" max="15" value="0" required></label>
+<label>Fiabilidad /10<input name="reliability" type="number" min="0" max="10" value="0" required></label>
+<label>Demo /5<input name="demo" type="number" min="0" max="5" value="0" required></label>
+<div class="actions"><button type="submit">Añadir puntuación</button><button type="button" class="secondary" id="export">Exportar CSV</button><button type="button" class="danger" id="reset">Borrar resultados</button></div></form></section>
+<section class="panel"><h2>Clasificación</h2><div class="over"><table><thead><tr><th>#</th><th>Participante</th><th>Casa</th><th>RF</th><th>Calidad</th><th>SDD</th><th>Cambio</th><th>Fiab.</th><th>Demo</th><th>Total</th><th></th></tr></thead><tbody id="board"></tbody></table></div></section>
+<p class="disclaimer">Las medias por casa son orientativas y no constituyen un benchmark científico. Archivo sin conexión: datos guardados localmente en este navegador.</p>
+<script>
+const keys=['functional','quality','process','change','reliability','demo'];const caps=[40,15,15,15,10,5];
+let entries=[];try{entries=JSON.parse(localStorage.getItem('tajamar-scoreboard-v1')||'[]')}catch{}
+const form=document.getElementById('entryForm');
+function save(){localStorage.setItem('tajamar-scoreboard-v1',JSON.stringify(entries));render()}
+function render(){let sorted=[...entries].sort((a,b)=>b.total-a.total);document.getElementById('board').innerHTML='';for(let [i,e] of sorted.entries()){
+let tr=document.createElement('tr');let vals=[`${i+1}`,e.name,e.house,...keys.map(k=>e[k]),e.total];for(let [j,v] of vals.entries()){
+let td=document.createElement('td'); if(j===2){let sp=document.createElement('span');sp.className='pill '+(v==='GSD'?'gsd':'spec');sp.textContent=v;td.appendChild(sp)}else td.textContent=v;tr.appendChild(td)}
+let td=document.createElement('td');let b=document.createElement('button');b.className='secondary';b.textContent='×';b.title='Eliminar';b.onclick=()=>{entries=entries.filter(it=>it.id!==e.id);save()};td.appendChild(b);tr.appendChild(td);document.getElementById('board').appendChild(tr)}
+for(let [house,id] of [['Spec Kit','spec'],['GSD','gsd']]){let group=entries.filter(e=>e.house===house);let avg=group.length?group.reduce((s,e)=>s+e.total,0)/group.length:0;
+document.getElementById(id+'Avg').textContent=group.length?avg.toFixed(1)+' / 100':'—';document.getElementById(id+'Count').textContent=group.length+' participantes';document.getElementById(id+'Bar').style.width=avg+'%'} }
+form.addEventListener('submit',ev=>{ev.preventDefault();let fd=new FormData(form);let values={};let total=0;for(let [i,k] of keys.entries()){let n=Number(fd.get(k));if(!Number.isFinite(n)||n<0||n>caps[i]){alert('Puntuación fuera de rango: '+k);return}values[k]=n;total+=n}
+entries.push({id:String(Date.now())+'-'+Math.random().toString(36).slice(2),name:String(fd.get('name')).trim(),house:fd.get('house'),...values,total});save();form.reset()});
+document.getElementById('reset').onclick=()=>{if(confirm('¿Borrar todos los resultados?')){entries=[];save()}};
+document.getElementById('export').onclick=()=>{let header=['name','house',...keys,'total'];let quote=s=>'"'+String(s).replaceAll('"','""')+'"';let csv=[header.join(';'),...entries.map(e=>header.map(k=>quote(e[k])).join(';')) ].join('\r\n');let blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='resultados-tajamar.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000)};
+render();
+</script></body></html>

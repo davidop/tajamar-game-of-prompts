@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+node_modules/
+**/node_modules/
+**/dist/
+**/.vite/
+workspaces/
+playwright-report/
+test-results/
+*.log
+.env
+.env.*
+!.env.example

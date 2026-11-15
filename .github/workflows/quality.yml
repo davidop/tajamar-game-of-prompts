@@ -1,0 +1,29 @@
+name: Quality gate
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate workshop materials
+        run: npm run check
+      - name: Starter dependencies
+        working-directory: starter
+        run: npm install --no-audit --no-fund
+      - name: Build deliberately incomplete starter
+        working-directory: starter
+        run: npm run build
+      - name: Check Playwright test syntax
+        run: node --check evaluation/acceptance.spec.js

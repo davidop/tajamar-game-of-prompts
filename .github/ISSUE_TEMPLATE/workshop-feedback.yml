@@ -1,0 +1,23 @@
+name: Feedback del workshop
+description: Incidencias o sugerencias sobre materiales del taller
+labels: [documentation]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Área
+      options:
+        - Instalación
+        - Spec Kit
+        - GSD Core
+        - Pruebas de aceptación
+        - Documentación
+    validations:
+      required: true
+  - type: textarea
+    id: detail
+    attributes:
+      label: Descripción
+      description: No incluyas claves ni datos personales.
+    validations:
+      required: true

@@ -1,0 +1,13 @@
+{
+  "name": "tajamar-game-of-prompts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Workshop 120 min: Spec Kit vs GSD Core con GitHub Copilot CLI",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "setup": "node scripts/create-workspace.mjs",
+    "doctor": "node scripts/check-prereqs.mjs",
+    "check": "node scripts/validate-kit.mjs"
+  }
+}
