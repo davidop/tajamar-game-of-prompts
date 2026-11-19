@@ -4,7 +4,8 @@ node_modules/
 **/node_modules/
 **/dist/
 **/.vite/
-workspaces/
+workspaces/*
+!workspaces/jorge-speckit/
 playwright-report/
 test-results/
 *.log
