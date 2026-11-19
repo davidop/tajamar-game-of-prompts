@@ -1,0 +1,23 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, sans-serif; background: #f7f8fc; color: #182239; }
+.shell { margin: 6vh auto; max-width: 720px; padding: 32px; background: #fff; border: 1px solid #dde3ef; border-radius: 20px; }
+h1 { margin-top: 0; }
+.field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+input, textarea { font: inherit; padding: 8px; border: 1px solid #5b6784; border-radius: 8px; }
+input[aria-invalid='true'] { border: 2px solid #b00020; }
+button { font: inherit; padding: 8px 14px; border: 1px solid #1d3a8a; border-radius: 8px; background: #fff; color: #1d3a8a; cursor: pointer; }
+button[type='submit'] { background: #1d3a8a; color: #fff; }
+button[aria-pressed='true'] { background: #1d3a8a; color: #fff; font-weight: 700; }
+button[aria-pressed='true']::before { content: '● '; }
+:focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
+.error { color: #b00020; font-weight: 600; min-height: 1.2em; margin: 0 0 8px; }
+.error:not(:empty)::before { content: '⚠ '; }
+.progress { margin: 20px 0 12px; font-size: 1.1rem; }
+.filters { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.empty { color: #3d4864; }
+.task-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.task { display: flex; justify-content: space-between; gap: 12px; padding: 12px; border: 1px solid #dde3ef; border-radius: 12px; }
+.task.done strong { text-decoration: line-through; }
+.task-body p { margin: 4px 0 0; white-space: pre-wrap; }
+.status { margin-left: 8px; font-size: 0.9rem; color: #3d4864; }
+.task-actions { display: flex; gap: 8px; align-items: flex-start; }
