@@ -17,6 +17,22 @@
 
 **Capturas de las aplicaciones:** pendientes de generar a partir de ejecuciones reales; no se incluyen imágenes simuladas. Mientras tanto, consulta los comandos de ejecución de más abajo y el [dashboard comparativo](dashboard/index.html). Las capturas se añadirán cuando puedan verificarse ambas interfaces.
 
+Para generar evidencias auténticas en ambos proyectos (Node.js 22+ y Chromium instalado), desde la raíz del repositorio, en Bash:
+
+```bash
+npm ci --prefix evaluation
+npm ci --prefix workspaces/david-gsd
+npm ci --prefix workspaces/jorge-speckit
+cd evaluation
+npx playwright install chromium
+CAPTURE_SHOWCASE=1 TASKFORGE_WORKSPACE=workspaces/david-gsd npx playwright test -g 'Visual evidence'
+CAPTURE_SHOWCASE=1 TASKFORGE_WORKSPACE=workspaces/jorge-speckit npx playwright test -g 'Visual evidence'
+```
+
+Cada ejecución guarda `taskforge-showcase.png` bajo `evaluation/test-results/` (ruta exacta indicada por Playwright). **Copia y renombra la primera captura antes de ejecutar la segunda**, para evitar que Playwright limpie los resultados anteriores. No publiques imágenes hasta comprobar que corresponden a cada aplicación.
+
+**GitHub Pages:** [abrir dashboard publicado](https://davidop.github.io/tajamar-game-of-prompts/) · [workflow de despliegue](https://github.com/davidop/tajamar-game-of-prompts/actions/workflows/deploy-dashboard.yml). La accesibilidad de la URL pública debe comprobarse desde un navegador; un workflow correcto por sí solo no la garantiza.
+
 ## 👥 Conoce a los ponentes
 
 | Ponente | Metodología | Perfil profesional |
