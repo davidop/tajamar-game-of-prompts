@@ -15,16 +15,22 @@
 
 | Ponente | Metodología | Perfil profesional |
 | --- | --- | --- |
-| **Jorge Fernández Sánchez** | GitHub Spec Kit | [LinkedIn de Jorge](https://www.linkedin.com/in/jorgefdezsanchez/) |
-| **David Oliva Paredes** | GSD Core | [LinkedIn de David](https://www.linkedin.com/in/davidolivaparedes/) |
+| **Jorge Fernández Sánchez · Devoteam** | GitHub Spec Kit | [LinkedIn de Jorge](https://www.linkedin.com/in/jorgefdezsanchez/) |
+| **David Oliva Paredes · knowmad mood** | GSD Core | [LinkedIn de David](https://www.linkedin.com/in/davidolivaparedes/) |
 
 La presentación oficial la prepara Jorge fuera de este repositorio y se compartirá después de la sesión.
+
+## ⭐ ¿Te resulta útil este experimento?
+
+Si te ayuda a entender cómo se trabaja con agentes de IA, **[dale una estrella al repositorio](https://github.com/davidop/tajamar-game-of-prompts)** para guardarlo y ayudar a que otros desarrolladores lo descubran. Comparte también el PRD, los resultados reproducibles y las limitaciones: no hay un ganador universal.
+
+**¿Quieres reproducirlo?** Empieza por la [guía para alumnos](docs/19-continua-aprendiendo.md), revisa el [dashboard](dashboard/index.html) y consulta los [resultados de CI](https://github.com/davidop/tajamar-game-of-prompts/actions/workflows/quality.yml). **¿Has encontrado una mejora o un fallo?** [Abre una issue](https://github.com/davidop/tajamar-game-of-prompts/issues/new) con pasos de reproducción y evidencias.
 
 ## 🎬 Empieza aquí: enseña el repo en 2 minutos
 
 | Recurso | Qué enseñar |
 | --- | --- |
-| **[Presentación a pantalla completa](presentation/index.html)** | 10 diapositivas HTML, flechas para avanzar |
+| **[Dashboard comparativo](dashboard/index.html)** | Comparativa visual de evidencias y pruebas; abre el HTML localmente |
 | **[PRD común de TaskForge](docs/02-documento-funcional.md)** | RF-01…RF-07 y contrato de pruebas |
 | **[Jorge · Spec Kit](workspaces/jorge-speckit/)** | Especificación, plan, tareas, código y Vitest |
 | **[David · GSD Core](workspaces/david-gsd/)** | Roadmap, 4 fases, 8 planes, código y node:test |
@@ -34,7 +40,7 @@ La presentación oficial la prepara Jorge fuera de este repositorio y se compart
 | **[Guion cronometrado](docs/16-sesion-demostrativa-120min.md)** | Qué muestra cada ponente y cuándo |
 | **[Mostrar el repo en 5 minutos](docs/17-mostrar-repo-en-5-minutos.md)** | Recorrido exprés, enlaces y plan de contingencia |
 
-**Abrir la presentación:** descarga o clona el repositorio y abre `presentation/index.html` en un navegador; usa ← y →. [Ver código de la presentación](presentation/index.html).
+**Presentación oficial:** Jorge la prepara fuera del repositorio y se publicará después de la sesión. El directorio `presentation/` contiene material HTML auxiliar previo, **no** la presentación oficial de Jorge.
 
 ## ✅ Resultados verificados en GitHub Actions
 
