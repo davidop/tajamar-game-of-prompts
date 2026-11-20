@@ -11,6 +11,15 @@
 
 [![Quality gate](https://github.com/davidop/tajamar-game-of-prompts/actions/workflows/quality.yml/badge.svg)](https://github.com/davidop/tajamar-game-of-prompts/actions/workflows/quality.yml)
 
+## 👥 Conoce a los ponentes
+
+| Ponente | Metodología | Perfil profesional |
+| --- | --- | --- |
+| **Jorge Fernández Sánchez** | GitHub Spec Kit | [LinkedIn de Jorge](https://www.linkedin.com/in/jorgefdezsanchez/) |
+| **David Oliva Paredes** | GSD Core | [LinkedIn de David](https://www.linkedin.com/in/davidolivaparedes/) |
+
+La presentación oficial la prepara Jorge fuera de este repositorio y se compartirá después de la sesión.
+
 ## 🎬 Empieza aquí: enseña el repo en 2 minutos
 
 | Recurso | Qué enseñar |
