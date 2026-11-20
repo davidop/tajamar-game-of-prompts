@@ -3,6 +3,19 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 let errors=[];
+// Evidence must be committed as actual PNG files, not broken or placeholder links.
+for (const name of ['gsd-core.png', 'spec-kit.png']) {
+  const relative = `assets/screenshots/${name}`;
+  const full = path.join(root, relative);
+  if (!fs.existsSync(full)) { errors.push(`Falta captura real: ${relative}`); continue; }
+  const bytes = fs.readFileSync(full);
+  if (bytes.length < 1000 || !bytes.subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10]))) errors.push(`PNG inválido: ${relative}`);
+}
+for (const readme of ['README.md','README.en.md']) {
+  const body = fs.readFileSync(path.join(root,readme),'utf8');
+  for (const name of ['gsd-core.png','spec-kit.png']) if (!body.includes(`assets/screenshots/${name}`)) errors.push(`Falta enlace a ${name} en ${readme}`);
+}
+
 const required = ['README.md','LICENSE','starter/package.json','starter/index.html','starter/src/main.js','docs/02-documento-funcional.md','docs/10-ruta-speckit.md','docs/11-ruta-gsd.md','evaluation/acceptance.spec.js','results/scoreboard.html','presentation/index.html','.github/workflows/quality.yml'];
 for(const relative of required) if(!fs.existsSync(path.join(root,relative))) errors.push(`Falta ${relative}`);
 for(const relative of ['docs/03-cambio-sorpresa.md','prompts/prompt-cambio.md']) if(fs.existsSync(path.join(root,relative))) errors.push(`Se ha filtrado el spoiler: ${relative}`);
