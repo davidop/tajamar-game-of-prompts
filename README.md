@@ -31,7 +31,7 @@ CAPTURE_SHOWCASE=1 TASKFORGE_WORKSPACE=workspaces/jorge-speckit npx playwright t
 
 Cada ejecución guarda `taskforge-showcase.png` bajo `evaluation/test-results/` (ruta exacta indicada por Playwright). **Copia y renombra la primera captura antes de ejecutar la segunda**, para evitar que Playwright limpie los resultados anteriores. No publiques imágenes hasta comprobar que corresponden a cada aplicación.
 
-**GitHub Pages:** [abrir dashboard publicado](https://davidop.github.io/tajamar-game-of-prompts/) · [workflow de despliegue](https://github.com/davidop/tajamar-game-of-prompts/actions/workflows/deploy-dashboard.yml). La accesibilidad de la URL pública debe comprobarse desde un navegador; un workflow correcto por sí solo no la garantiza.
+**GitHub Pages:** [abrir dashboard publicado](https://davidop.github.io/tajamar-game-of-prompts/) · [workflow de despliegue](https://github.com/davidop/tajamar-game-of-prompts/actions/runs/44721641477). La accesibilidad de la URL pública debe comprobarse desde un navegador; un workflow correcto por sí solo no la garantiza.
 
 ## 👥 Conoce a los ponentes
 
