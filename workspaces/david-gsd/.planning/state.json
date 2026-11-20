@@ -1,0 +1,33 @@
+{
+  "contract": "1.0.0",
+  "flavor": "core",
+  "milestone": null,
+  "phases": [
+    {
+      "number": "1",
+      "name": "Capture & Persist Tasks",
+      "status": "complete"
+    },
+    {
+      "number": "2",
+      "name": "Complete, Filter & Progress",
+      "status": "complete"
+    },
+    {
+      "number": "3",
+      "name": "Delete with Confirmation",
+      "status": "complete"
+    },
+    {
+      "number": "4",
+      "name": "Accessibility, Contract & Docs",
+      "status": "complete"
+    }
+  ],
+  "next": {
+    "command": "/gsd-progress",
+    "label": "Show progress",
+    "reason": "Unsure of state — showing progress"
+  },
+  "updated_at": "2026-11-16T13:12:24.502Z"
+}

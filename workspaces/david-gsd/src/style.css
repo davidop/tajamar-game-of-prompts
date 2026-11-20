@@ -1,0 +1,100 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  background: #f7f8fc;
+  color: #182239;
+}
+
+.shell {
+  margin: 5vh auto;
+  max-width: 780px;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid #dde3ef;
+  border-radius: 20px;
+}
+
+h1 { margin-top: 0; }
+
+.task-form { display: grid; gap: 8px; margin-bottom: 24px; }
+.task-form label { font-weight: 600; }
+
+input, textarea, button {
+  font: inherit;
+  padding: 8px 10px;
+  border: 2px solid #5a6785;
+  border-radius: 8px;
+  background: #fff;
+  color: #182239;
+}
+
+input[aria-invalid="true"] { border-color: #a30000; border-style: dashed; }
+
+button {
+  justify-self: start;
+  background: #182239;
+  color: #fff;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid #0b57d0;
+  outline-offset: 2px;
+}
+
+.form-error { margin: 0; color: #a30000; font-weight: 600; }
+.form-error:not(:empty)::before { content: "Error: "; }
+
+.empty-state { color: #3b4763; }
+
+.task-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.task-list li {
+  padding: 12px 16px;
+  border: 1px solid #5a6785;
+  border-radius: 12px;
+}
+.task-list p { margin: 4px 0; }
+
+.status {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 2px solid #182239;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.task-toggle { margin-left: 12px; padding: 4px 12px; }
+.task-list li:has(.status-completed) strong { text-decoration: line-through; }
+.task-list li:has(.status-completed) { border-style: dashed; }
+.shell section:focus { outline: none; }
+.filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.filter-bar button.is-active { font-weight: 700; text-decoration: underline; border-width: 2px; }
+.progress { margin: 8px 0 16px; font-size: 1.125rem; }
+.status-completed { background: #e3f1e6; }
+.status-pending { background: #fff4d6; }
+
+.task-delete { margin-left: 8px; padding: 4px 12px; }
+
+dialog {
+  padding: 24px;
+  border: 2px solid #5a6785;
+  border-radius: 12px;
+  width: 90vw;
+  max-width: 28rem;
+  background: #fff;
+  color: #182239;
+}
+dialog::backdrop { background: rgba(24, 34, 57, 0.6); }
+dialog p { margin: 0 0 16px; overflow-wrap: anywhere; }
+dialog .confirm-dialog-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+dialog .confirm-dialog-actions button { justify-self: auto; }
+
+@media (max-width: 600px) {
+  .shell { margin: 0; padding: 16px; border-radius: 0; border-width: 0; }
+  button { justify-self: stretch; }
+  dialog { width: calc(100vw - 32px); }
+}
