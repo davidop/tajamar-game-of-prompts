@@ -1,0 +1,22 @@
+name: Improvement proposal
+description: Propose a measurable improvement or another reproducible experiment
+title: "[Idea]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change and acceptance criteria
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: How would we verify it?
+      description: Explain tests, evidence and any limitations
