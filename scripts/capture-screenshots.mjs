@@ -1,6 +1,8 @@
 import { spawn } from 'node:child_process';
 import { mkdir } from 'node:fs/promises';
-import { chromium } from '../evaluation/node_modules/playwright/index.mjs';
+import { createRequire } from 'node:module';
+const require = createRequire(new URL('../evaluation/package.json', import.meta.url));
+const { chromium } = require('@playwright/test');
 
 const apps = [
   { id: 'gsd-core', cwd: 'workspaces/david-gsd' },
