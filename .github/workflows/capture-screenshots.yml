@@ -1,0 +1,40 @@
+name: Capture real TaskForge screenshots
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: evaluation/package-lock.json
+      - name: Install dependencies and Chromium
+        run: |
+          npm ci --prefix evaluation
+          npm ci --prefix workspaces/david-gsd
+          npm ci --prefix workspaces/jorge-speckit
+          cd evaluation && npx playwright install --with-deps chromium
+      - name: Capture both real running apps
+        run: node scripts/capture-screenshots.mjs
+      - name: Upload screenshot artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: taskforge-real-screenshots
+          path: assets/screenshots/*.png
+      - name: Commit screenshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/screenshots/*.png
+          if ! git diff --cached --quiet; then
+            git commit -m "docs: add real screenshots of both TaskForge apps"
+            git push
+          fi
