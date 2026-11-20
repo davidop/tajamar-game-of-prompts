@@ -1,0 +1,78 @@
+name: Capture real TaskForge screenshots
+on:
+  push:
+    paths:
+      - '.github/workflows/capture-showcase.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install both apps and Playwright
+        run: |
+          npm ci --prefix evaluation
+          npm ci --prefix workspaces/david-gsd
+          npm ci --prefix workspaces/jorge-speckit
+          cd evaluation
+          npx playwright install --with-deps chromium
+      - name: Capture GSD Core
+        working-directory: evaluation
+        env:
+          CI: 'true'
+          CAPTURE_SHOWCASE: '1'
+          TASKFORGE_WORKSPACE: workspaces/david-gsd
+        run: |
+          npx playwright test --grep 'Visual evidence'
+          mkdir -p ../assets/screenshots
+          find test-results -name taskforge-showcase.png -type f -print -quit | xargs -r -I{} cp '{}' ../assets/screenshots/gsd-core.png
+          test -s ../assets/screenshots/gsd-core.png
+      - name: Capture Spec Kit
+        working-directory: evaluation
+        env:
+          CI: 'true'
+          CAPTURE_SHOWCASE: '1'
+          TASKFORGE_WORKSPACE: workspaces/jorge-speckit
+        run: |
+          npx playwright test --grep 'Visual evidence'
+          find test-results -name taskforge-showcase.png -type f -print -quit | xargs -r -I{} cp '{}' ../assets/screenshots/spec-kit.png
+          test -s ../assets/screenshots/spec-kit.png
+      - name: Add screenshots to both READMEs
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const images = [
+            '![GSD Core TaskForge real Playwright screenshot](assets/screenshots/gsd-core.png)',
+            '![Spec Kit TaskForge real Playwright screenshot](assets/screenshots/spec-kit.png)'
+          ];
+          for (const path of ['README.md','README.en.md']) {
+            let content = fs.readFileSync(path, 'utf8');
+            const heading = path === 'README.md' ? '### Capturas reales de ambas aplicaciones' : '### Real screenshots of both applications';
+            const block = '\n' + heading + '\n\n' + images.join('\n\n') + '\n';
+            if (!content.includes(heading)) {
+              const anchor = path === 'README.md' ? '## 👥 Conoce a los ponentes' : '## Run the apps';
+              if (!content.includes(anchor)) throw new Error('Missing README anchor: ' + anchor);
+              content = content.replace(anchor, block + '\n' + anchor);
+            }
+            fs.writeFileSync(path, content);
+          }
+          NODE
+      - name: Commit actual screenshots and README
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/screenshots/gsd-core.png assets/screenshots/spec-kit.png README.md README.en.md
+          git diff --cached --quiet || (git commit -m "docs: publish verified Playwright screenshots of both TaskForge apps" && git push)
+      - name: Upload screenshot evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: taskforge-showcase-screenshots
+          path: assets/screenshots/
+          if-no-files-found: ignore
