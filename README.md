@@ -2,7 +2,7 @@
 
 ![Game of Prompts: dos casas](assets/duel.svg)
 
-**Tajamar · Sesión demostrativa de 120 minutos · GitHub Copilot CLI**
+**Tajamar · Sesión demostrativa de 120 minutos · GitHub Copilot CLI** · [🇬🇧 English](README.en.md)
 
 > **Una especificación. Dos metodologías. Dos implementaciones reales.**
 > Jorge presenta **GitHub Spec Kit** y David presenta **GSD Core**.
@@ -10,6 +10,12 @@
 > **No es un workshop práctico:** el público no necesita instalar herramientas.
 
 [![Quality gate](https://github.com/davidop/tajamar-game-of-prompts/actions/workflows/quality.yml/badge.svg)](https://github.com/davidop/tajamar-game-of-prompts/actions/workflows/quality.yml)
+
+## 🧪 Un PRD, dos aplicaciones, pruebas compartidas
+
+**TaskForge** se ha implementado dos veces desde los mismos requisitos: una versión con Spec Kit y otra con GSD Core. Explora el [código de Jorge](workspaces/jorge-speckit/) y el [código de David](workspaces/david-gsd/), ejecuta ambas apps y contrasta el resultado con las [pruebas E2E compartidas](evaluation/).
+
+**Capturas de las aplicaciones:** pendientes de generar a partir de ejecuciones reales; no se incluyen imágenes simuladas. Mientras tanto, consulta los comandos de ejecución de más abajo y el [dashboard comparativo](dashboard/index.html). Las capturas se añadirán cuando puedan verificarse ambas interfaces.
 
 ## 👥 Conoce a los ponentes
 
@@ -24,7 +30,7 @@ La presentación oficial la prepara Jorge fuera de este repositorio y se compart
 
 Si te ayuda a entender cómo se trabaja con agentes de IA, **[dale una estrella al repositorio](https://github.com/davidop/tajamar-game-of-prompts)** para guardarlo y ayudar a que otros desarrolladores lo descubran. Comparte también el PRD, los resultados reproducibles y las limitaciones: no hay un ganador universal.
 
-**¿Quieres reproducirlo?** Empieza por la [guía para alumnos](docs/19-continua-aprendiendo.md), revisa el [dashboard](dashboard/index.html) y consulta los [resultados de CI](https://github.com/davidop/tajamar-game-of-prompts/actions/workflows/quality.yml). **¿Has encontrado una mejora o un fallo?** [Abre una issue](https://github.com/davidop/tajamar-game-of-prompts/issues/new) con pasos de reproducción y evidencias.
+**¿Quieres reproducirlo?** Empieza por la [guía para alumnos](docs/19-continua-aprendiendo.md), revisa el [dashboard](dashboard/index.html) y consulta los [resultados de CI](https://github.com/davidop/tajamar-game-of-prompts/actions/workflows/quality.yml). Consulta también la [guía para contribuir](CONTRIBUTING.md) y el [README en inglés](README.en.md). **¿Has encontrado una mejora o un fallo?** [Abre una issue](https://github.com/davidop/tajamar-game-of-prompts/issues/new) con pasos de reproducción y evidencias.
 
 ## 🎬 Empieza aquí: enseña el repo en 2 minutos
 
