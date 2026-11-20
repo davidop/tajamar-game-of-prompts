@@ -31,7 +31,7 @@ copilot
 
 ## B. Ejecución real (dentro de Copilot CLI)
 
-En el minuto 30, iniciar:
+En el minuto 45, si se parte de un starter nuevo, iniciar:
 
 ```text
 /gsd-new-project --auto @docs/02-documento-funcional.md

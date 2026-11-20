@@ -8,11 +8,11 @@
 | Cambios | Revisión de especificación y plan | Actualización de fases y artefactos | ¿Qué se rompe o se olvida? |
 | Verificación | Análisis, build y tests | Verificación de trabajo, build y tests | ¿Qué pruebas aportan evidencia? |
 
-La tabla describe **flujos habituales**, no garantías del comportamiento de una versión concreta. Ambos frameworks pueden producir código excelente o incompleto. Las variables incontroladas (experiencia individual, cuotas, velocidad de red, prompts, modelo real asignado) impiden atribuir causalmente una mejora al framework. Pedimos a cada equipo registrar estas condiciones.
+La tabla describe **flujos habituales**, no garantías del comportamiento de una versión concreta. Ambos frameworks pueden producir código excelente o incompleto. Las variables incontroladas (experiencia individual, cuotas, velocidad de red, prompts, modelo real asignado) impiden atribuir causalmente una mejora al framework. Cada ponente debe registrar estas condiciones y distinguir los resultados del ensayo de los obtenidos por CI.
 
 ## Hoja de observación
 
-- Casa y nombre del equipo:
+- Casa y ponente:
 - Modelo seleccionado (si se conoce):
 - Versión de CLI y framework:
 - Minutos hasta primera tarea creada:

@@ -23,6 +23,7 @@
 | **[Pruebas Playwright compartidas](evaluation/)** | Mismo contrato de aceptación para ambos |
 | **[GitHub Actions](.github/workflows/quality.yml)** | Tests, builds y E2E de ambas implementaciones |
 | **[Guion cronometrado](docs/16-sesion-demostrativa-120min.md)** | Qué muestra cada ponente y cuándo |
+| **[Mostrar el repo en 5 minutos](docs/17-mostrar-repo-en-5-minutos.md)** | Recorrido exprés, enlaces y plan de contingencia |
 
 **Abrir la presentación:** descarga o clona el repositorio y abre `presentation/index.html` en un navegador; usa ← y →. [Ver código de la presentación](presentation/index.html).
 

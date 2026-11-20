@@ -1,13 +1,45 @@
-# Acceptance suite (pruebas comunes del PRD base)
+# Playwright — contrato común RF-01…RF-07
 
-Tests E2E con Playwright que consumen el contrato `data-testid` del PRD. No son un benchmark completo de UX; complementarlos con revisión humana.
+Estas pruebas E2E usan los mismos `data-testid` para validar las implementaciones de **Jorge (Spec Kit)** y **David (GSD Core)**. Cada ejecución inicia una app Vite automáticamente, usa un contexto de navegador limpio y cierra el servidor al terminar.
 
-1. En el proyecto de un alumno, `npm run dev` en puerto 5173.
-2. Aquí ejecutar `npm install` y una vez `npx playwright install chromium`.
-3. `npm test`. Puede utilizarse `BASE_URL=http://localhost:5173 npm test`.
-4. La configuración de app del alumno debe admitir los controles documentados; cualquier divergencia debe puntuarse manualmente y registrarse, no inventar fallos de funcionalidad.
+## Requisitos
 
-Para comparar condiciones, cada entrega debe tener una sesión aislada de navegador nueva. La batería crea datos con interfaz; no depende de la representación interna de `localStorage`.
+- Node.js 22+ y npm.
+- Dependencias de la aplicación seleccionada instaladas.
+- Playwright y Chromium instalados.
 
-5. El suite comprueba únicamente los requisitos RF-01 a RF-07 del PRD 1.0; **no contiene el cambio sorpresa**.
-6. Requiere Node.js 22+ y Playwright con navegador Chromium. El runner de CI del kit no ejecuta estas pruebas sobre una app resuelta, porque el starter está deliberadamente incompleto.
+## Desde la raíz del repositorio
+
+```bash
+npm ci --prefix workspaces/david-gsd
+npm ci --prefix workspaces/jorge-speckit
+npm ci --prefix evaluation
+cd evaluation
+npx playwright install chromium
+npm test
+```
+
+Por defecto `npm test` ejecuta la suite contra **GSD Core**.
+
+Para ejecutar contra **Spec Kit**:
+
+```powershell
+# PowerShell (Windows)
+$env:TASKFORGE_WORKSPACE="workspaces/jorge-speckit"
+npm test
+```
+
+```bash
+# bash (Linux/macOS)
+TASKFORGE_WORKSPACE=workspaces/jorge-speckit npm test
+```
+
+Si quieres validar las **copias independientes** creadas con `npm run demo:prepare`, utiliza `demos/david-gsd` o `demos/jorge-speckit` como `TASKFORGE_WORKSPACE` e instala antes sus dependencias.
+
+**No levantes manualmente otro Vite en el puerto 5173 durante la prueba**: el servidor de Playwright lo gestiona. Si ya hay un servidor activo en local, la configuración puede reutilizarlo; para comparar dos apps, detén cualquier servidor anterior.
+
+## GitHub Actions
+
+El workflow [Quality gate](../.github/workflows/quality.yml) ejecuta **unit tests, build y Playwright para ambas aplicaciones** en jobs aislados. Un fallo conserva informe HTML, trazas y capturas como artefacto.
+
+**Alcance:** la suite cubre RF-01…RF-07 del PRD base. No incluye el cambio sorpresa ni sustituye una auditoría completa de accesibilidad. Los resultados de cada ejecución son la fuente de verdad; no se infiere PASS de la documentación de GSD o Spec Kit.
