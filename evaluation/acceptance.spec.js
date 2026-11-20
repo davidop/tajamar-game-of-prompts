@@ -97,3 +97,13 @@ test('RF03 RF06: el estado completado permanece tras recargar', async ({ page })
   await expect(page.getByTestId('task-item')).toHaveCount(1);
   await expect(page.getByTestId('progress-value')).toContainText('100%');
 });
+
+test('Visual evidence: real TaskForge interface', async ({ page }, testInfo) => {
+  test.skip(!process.env.CAPTURE_SHOWCASE, 'Opt-in screenshot generation');
+  await addTask(page, 'Preparar demo de Tajamar', 'Revisar los requisitos de TaskForge');
+  await addTask(page, 'Ejecutar pruebas E2E', 'Validar el mismo contrato de aceptación');
+  await addTask(page, 'Publicar resultados', 'Compartir las evidencias con la comunidad');
+  await page.getByTestId('task-item').first().getByTestId('task-toggle').click();
+  await expect(page.getByTestId('progress-value')).toContainText('33%');
+  await page.screenshot({ path: testInfo.outputPath('taskforge-showcase.png'), fullPage: true, animations: 'disabled' });
+});
