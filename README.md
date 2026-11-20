@@ -15,7 +15,7 @@
 
 **TaskForge** se ha implementado dos veces desde los mismos requisitos: una versión con Spec Kit y otra con GSD Core. Explora el [código de Jorge](workspaces/jorge-speckit/) y el [código de David](workspaces/david-gsd/), ejecuta ambas apps y contrasta el resultado con las [pruebas E2E compartidas](evaluation/).
 
-**Capturas de las aplicaciones:** pendientes de generar a partir de ejecuciones reales; no se incluyen imágenes simuladas. Mientras tanto, consulta los comandos de ejecución de más abajo y el [dashboard comparativo](dashboard/index.html). Las capturas se añadirán cuando puedan verificarse ambas interfaces.
+**Capturas auténticas de las dos aplicaciones:** generadas automáticamente por [GitHub Actions con Playwright](.github/workflows/capture-showcase.yml), tras crear tres tareas y completar una (33 % de progreso). Se publican a continuación; no son maquetas ni imágenes simuladas.
 
 Para generar evidencias auténticas en ambos proyectos (Node.js 22+ y Chromium instalado), desde la raíz del repositorio, en Bash:
 
@@ -29,9 +29,9 @@ CAPTURE_SHOWCASE=1 TASKFORGE_WORKSPACE=workspaces/david-gsd npx playwright test 
 CAPTURE_SHOWCASE=1 TASKFORGE_WORKSPACE=workspaces/jorge-speckit npx playwright test -g 'Visual evidence'
 ```
 
-Cada ejecución guarda `taskforge-showcase.png` bajo `evaluation/test-results/` (ruta exacta indicada por Playwright). **Copia y renombra la primera captura antes de ejecutar la segunda**, para evitar que Playwright limpie los resultados anteriores. No publiques imágenes hasta comprobar que corresponden a cada aplicación.
+Cada ejecución guarda `taskforge-showcase.png` bajo `evaluation/test-results/` (ruta exacta indicada por Playwright). **Copia y renombra la primera captura antes de ejecutar la segunda**, para evitar que Playwright limpie los resultados anteriores. Las capturas versionadas se encuentran en `assets/screenshots/` y su [commit de publicación](https://github.com/davidop/tajamar-game-of-prompts/commit/61ea8c3db83faccb49a5ebd94dd23cdbff3c8066) permite auditarlas.
 
-**GitHub Pages:** [abrir dashboard publicado](https://davidop.github.io/tajamar-game-of-prompts/) · [workflow de despliegue](https://github.com/davidop/tajamar-game-of-prompts/actions/runs/44721641477). La accesibilidad de la URL pública debe comprobarse desde un navegador; un workflow correcto por sí solo no la garantiza.
+**GitHub Pages:** [abrir dashboard público](https://davidop.github.io/tajamar-game-of-prompts/) · [despliegue de referencia](https://github.com/davidop/tajamar-game-of-prompts/actions/runs/44721641477). El dashboard presenta una instantánea de resultados, no métricas de CI en tiempo real.
 
 
 ### Capturas reales de ambas aplicaciones
@@ -53,13 +53,13 @@ La presentación oficial la prepara Jorge fuera de este repositorio y se compart
 
 Si te ayuda a entender cómo se trabaja con agentes de IA, **[dale una estrella al repositorio](https://github.com/davidop/tajamar-game-of-prompts)** para guardarlo y ayudar a que otros desarrolladores lo descubran. Comparte también el PRD, los resultados reproducibles y las limitaciones: no hay un ganador universal.
 
-**¿Quieres reproducirlo?** Empieza por la [guía para alumnos](docs/19-continua-aprendiendo.md), revisa el [dashboard](dashboard/index.html) y consulta los [resultados de CI](https://github.com/davidop/tajamar-game-of-prompts/actions/workflows/quality.yml). Consulta también la [guía para contribuir](CONTRIBUTING.md) y el [README en inglés](README.en.md). **¿Has encontrado una mejora o un fallo?** [Abre una issue](https://github.com/davidop/tajamar-game-of-prompts/issues/new) con pasos de reproducción y evidencias.
+**¿Quieres reproducirlo?** Empieza por la [guía para alumnos](docs/19-continua-aprendiendo.md), revisa el [dashboard público](https://davidop.github.io/tajamar-game-of-prompts/) y consulta los [resultados de CI](https://github.com/davidop/tajamar-game-of-prompts/actions/workflows/quality.yml). Consulta también la [guía para contribuir](CONTRIBUTING.md) y el [README en inglés](README.en.md). **¿Has encontrado una mejora o un fallo?** [Abre una issue](https://github.com/davidop/tajamar-game-of-prompts/issues/new) con pasos de reproducción y evidencias.
 
 ## 🎬 Empieza aquí: enseña el repo en 2 minutos
 
 | Recurso | Qué enseñar |
 | --- | --- |
-| **[Dashboard comparativo](dashboard/index.html)** | Comparativa visual de evidencias y pruebas; abre el HTML localmente |
+| **[Dashboard comparativo](https://davidop.github.io/tajamar-game-of-prompts/)** | Comparativa visual pública de evidencias y pruebas |
 | **[PRD común de TaskForge](docs/02-documento-funcional.md)** | RF-01…RF-07 y contrato de pruebas |
 | **[Jorge · Spec Kit](workspaces/jorge-speckit/)** | Especificación, plan, tareas, código y Vitest |
 | **[David · GSD Core](workspaces/david-gsd/)** | Roadmap, 4 fases, 8 planes, código y node:test |
