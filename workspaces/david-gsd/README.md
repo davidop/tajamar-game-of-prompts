@@ -43,4 +43,4 @@ Controles nativos (`button`, `input`) operables con teclado, foco visible con `:
 
 ## Criterios de aceptación
 
-La trazabilidad de los 7 criterios del PRD §6 (evidencia automática y pasos manuales de navegador) está en [`.planning/phases/04-accessibility-contract-docs/04-ACCEPTANCE.md`](.planning/phases/04-accessibility-contract-docs/04-ACCEPTANCE.md).
+La trazabilidad de los 7 criterios del PRD §6 (evidencia automática y pasos manuales de navegador) está en [`.planning/milestones/v1.0-phases/04-accessibility-contract-docs/04-ACCEPTANCE.md`](.planning/phases/04-accessibility-contract-docs/04-ACCEPTANCE.md).

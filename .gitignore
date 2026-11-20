@@ -13,3 +13,6 @@ test-results/
 .env
 .env.*
 !.env.example
+
+# Copias aisladas para ensayar la demo sin modificar el repositorio docente
+demos/

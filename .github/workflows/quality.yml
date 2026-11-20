@@ -6,24 +6,99 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+
 jobs:
-  verify:
+  kit:
+    name: Workshop kit and starter
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Node.js 22
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate workshop materials
+      - name: Validate repo and PRD
         run: npm run check
-      - name: Starter dependencies
+      - name: Install starter dependencies
         working-directory: starter
         run: npm install --no-audit --no-fund
-      - name: Build deliberately incomplete starter
+      - name: Build starter
         working-directory: starter
         run: npm run build
-      - name: Check Playwright test syntax
-        run: node --check evaluation/acceptance.spec.js
+      - name: Validate Playwright syntax
+        run: |
+          node --check evaluation/acceptance.spec.js
+          node --check evaluation/playwright.config.js
+          node --check scripts/prepare-demo.mjs
+
+  implementations:
+    name: ${{ matrix.name }} — tests + build
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: GSD Core
+            workspace: workspaces/david-gsd
+          - name: Spec Kit
+            workspace: workspaces/jorge-speckit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: ${{ matrix.workspace }}/package-lock.json
+      - name: Install dependencies
+        run: npm ci --prefix ${{ matrix.workspace }} --no-audit --no-fund
+      - name: Unit tests
+        run: npm --prefix ${{ matrix.workspace }} test
+      - name: Production build
+        run: npm --prefix ${{ matrix.workspace }} run build
+
+  e2e:
+    name: ${{ matrix.name }} — Playwright RF01–RF07
+    needs: implementations
+    if: always() && needs.implementations.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: GSD Core
+            workspace: workspaces/david-gsd
+          - name: Spec Kit
+            workspace: workspaces/jorge-speckit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: |
+            evaluation/package-lock.json
+            ${{ matrix.workspace }}/package-lock.json
+      - name: Install application dependencies
+        run: npm ci --prefix ${{ matrix.workspace }} --no-audit --no-fund
+      - name: Install Playwright dependencies
+        working-directory: evaluation
+        run: npm ci --no-audit --no-fund
+      - name: Install Chromium
+        working-directory: evaluation
+        run: npx playwright install --with-deps chromium
+      - name: Acceptance tests (auto-start Vite)
+        working-directory: evaluation
+        env:
+          TASKFORGE_WORKSPACE: ${{ matrix.workspace }}
+        run: npm test
+      - name: Publish report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-${{ matrix.name }}
+          path: |
+            evaluation/playwright-report/
+            evaluation/test-results/
+          if-no-files-found: ignore

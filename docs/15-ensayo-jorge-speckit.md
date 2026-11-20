@@ -1,3 +1,5 @@
+> **Importante:** Para mostrar el código y los artefactos publicados usa `workspaces/jorge-speckit/`. Para ejecutar comandos del framework con Git independiente, usa `npm run demo:prepare` y `demos/jorge-speckit/`. Las demos empiezan con un nuevo commit baseline, no con el historial original del ensayo.
+
 # Ensayo de Jorge — Casa Spec Kit
 
 **Objetivo:** recorrer Spec Kit desde constitución y especificación hasta tareas, implementación y pruebas usando el mismo TaskForge que David. [Protocolo compartido](13-ensayo-ponentes.md).
@@ -11,15 +13,14 @@ npm run check
 npm run doctor
 git config --get user.name
 git config --get user.email
-npm run setup -- --framework spec-kit --name jorge-speckit
-cd workspaces/jorge-speckit
+npm run demo:prepare
+cd demos/jorge-speckit
 git rev-parse --show-toplevel
 npm install
-uv tool install specify-cli
+uv tool install specify-cli  # solo si necesitas la CLI en el equipo
 specify version
-specify init --here --force --integration copilot
-git add -A
-git commit -m "chore: install Spec Kit for rehearsal"
+specify init --here --force --integration copilot  # solo para reconfigurar el snapshot
+git status --short  # Spec Kit ya está presente en el snapshot; no reinstales sin necesidad
 copilot
 ```
 
@@ -40,9 +41,9 @@ copilot
 /speckit-analyze
 ```
 
-La secuencia es orientativa: **no lanzar todos los pasos de una vez**. Tras cada uno, revisar el output y registrar las preguntas que Spec Kit requiera. Validar que `/speckit-specify` cubre RF-01..RF-07 y el contrato `data-testid`. En algunas versiones, `analyze` se utiliza antes de implementar para comprobar consistencia; registrar la secuencia empleada.
+El snapshot publicado ya incluye artefactos y código. Para mostrar el flujo desde cero crea otro workspace; la secuencia es orientativa: **no lanzar todos los pasos de una vez**. Tras cada uno, revisar el output y registrar las preguntas que Spec Kit requiera. Validar que `/speckit-specify` cubre RF-01..RF-07 y el contrato `data-testid`. En algunas versiones, `analyze` se utiliza antes de implementar para comprobar consistencia; registrar la secuencia empleada.
 
-- **Minuto 75:** incorporar el mismo cambio privado anunciado a David, actualizando especificación, plan y tareas antes de editar código.
+- **Minuto 70:** incorporar el mismo cambio privado anunciado a David, actualizando especificación, plan y tareas antes de editar código.
 - Preguntar cuándo el rigor documental aporta valor y cuándo consume tiempo que necesita el MVP.
 - Documentar especificaciones, plan, tareas y diffs de corrección.
 

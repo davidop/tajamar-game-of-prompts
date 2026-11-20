@@ -2,74 +2,114 @@
 
 ![Game of Prompts: dos casas](assets/duel.svg)
 
-**Sesión técnica demostrativa de 120 minutos · Tajamar**
+**Tajamar · Sesión demostrativa de 120 minutos · GitHub Copilot CLI**
 
-**Una especificación. Dos metodologías. Un mismo desafío.** Jorge presenta **GitHub Spec Kit** y David presenta **GSD Core**, ambos con **GitHub Copilot CLI**. El público observa cómo los agentes convierten el mismo PRD de TaskForge en especificaciones, planes, código y pruebas, y cómo reaccionan ante un cambio de requisitos.
+> **Una especificación. Dos metodologías. Dos implementaciones reales.**
+> Jorge presenta **GitHub Spec Kit** y David presenta **GSD Core**.
+> Los asistentes ven los artefactos, el código, los tests y la respuesta a un cambio de requisitos.
+> **No es un workshop práctico:** el público no necesita instalar herramientas.
 
-> **Formato:** demostración en directo de los dos ponentes, no workshop práctico. Los asistentes **no necesitan instalar herramientas, programar ni entregar ejercicios**. El repositorio contiene el starter y la documentación para reproducir el ejemplo voluntariamente.
+[![Quality gate](https://github.com/davidop/tajamar-game-of-prompts/actions/workflows/quality.yml/badge.svg)](https://github.com/davidop/tajamar-game-of-prompts/actions/workflows/quality.yml)
 
-## 🎬 Agenda de la sesión
+## 🎬 Empieza aquí: enseña el repo en 2 minutos
 
-| Tiempo | Contenido | Responsable |
+| Recurso | Qué enseñar |
+| --- | --- |
+| **[Presentación a pantalla completa](presentation/index.html)** | 10 diapositivas HTML, flechas para avanzar |
+| **[PRD común de TaskForge](docs/02-documento-funcional.md)** | RF-01…RF-07 y contrato de pruebas |
+| **[Jorge · Spec Kit](workspaces/jorge-speckit/)** | Especificación, plan, tareas, código y Vitest |
+| **[David · GSD Core](workspaces/david-gsd/)** | Roadmap, 4 fases, 8 planes, código y node:test |
+| **[Comparativa de métodos](docs/08-comparativa.md)** | Diferencias de proceso y trade-offs |
+| **[Pruebas Playwright compartidas](evaluation/)** | Mismo contrato de aceptación para ambos |
+| **[GitHub Actions](.github/workflows/quality.yml)** | Tests, builds y E2E de ambas implementaciones |
+| **[Guion cronometrado](docs/16-sesion-demostrativa-120min.md)** | Qué muestra cada ponente y cuándo |
+
+**Abrir la presentación:** descarga o clona el repositorio y abre `presentation/index.html` en un navegador; usa ← y →. [Ver código de la presentación](presentation/index.html).
+
+## 🗓️ Agenda de 120 minutos
+
+| Minutos | Contenido | Ponente |
 | --- | --- | --- |
-| 00–10 | Del prompting al Spec-Driven Development | Ambos |
-| 10–20 | PRD de TaskForge y condiciones de comparación | Ambos |
-| 20–45 | Demo Spec Kit: especificación, planificación y código | Jorge |
-| 45–70 | Demo GSD Core: contexto, fases, ejecución y commits | David |
-| 70–90 | Cambio de requisitos en ambas soluciones | Ambos |
-| 90–105 | Playwright, errores reales y correcciones | Ambos |
-| 105–115 | Comparativa técnica: trazabilidad, cobertura y fricción | Ambos |
+| 00–10 | Prompting, SDD y reglas de comparación | Ambos |
+| 10–20 | PRD TaskForge y contrato compartido | Ambos |
+| 20–45 | Spec Kit: constitución, especificación, plan, tareas y app | Jorge |
+| 45–70 | GSD Core: contexto, roadmap, fases, ejecución y app | David |
+| 70–90 | Cambio de requisitos y análisis de impacto | Ambos |
+| 90–105 | Builds, tests, Playwright y fallos observables | Ambos |
+| 105–115 | Comparación técnica basada en evidencias | Ambos |
 | 115–120 | Preguntas y conclusiones | Ambos |
 
-**Guion principal:** [docs/16-sesion-demostrativa-120min.md](docs/16-sesion-demostrativa-120min.md).
+## 🚀 Ejecutar ambas implementaciones
 
-## 🧪 Caso práctico común
-
-[TaskForge](docs/02-documento-funcional.md) es una app web de gestión de tareas con creación, estados, borrado con confirmación, filtros, persistencia en `localStorage` y progreso. Ambos ponentes parten del **mismo PRD 1.0**, del **mismo starter Vite** y de un modelo Copilot equivalente siempre que sea posible.
-
-- [Starter sin resolver](starter/)
-- [PRD y contrato de testabilidad](docs/02-documento-funcional.md)
-- [Pruebas de aceptación Playwright](evaluation/)
-- [Consigna común](prompts/prompt-comun.md)
-- [Comparativa metodológica](docs/08-comparativa.md)
-
-## 👥 Preparación de ponentes
-
-- [Protocolo de ensayo conjunto](docs/13-ensayo-ponentes.md)
-- [David — GSD Core](docs/14-ensayo-david-gsd.md)
-- [Jorge — Spec Kit](docs/15-ensayo-jorge-speckit.md)
-- [Guion de realización y checkpoints](docs/16-sesion-demostrativa-120min.md)
-- [Resultados del ensayo](results/plantilla-ensayo-ponentes.csv)
-
-**Antes de la sesión:** ambos ensayan el recorrido completo, preparan checkpoints reales (baseline, plan, implementación y validación), verifican las pruebas y dejan las dependencias instaladas. Durante la sesión ejecutan pasos reales, sin depender de que un agente complete todo en una ventana de 25 minutos.
-
-### Crear un workspace aislado para reproducir las demos
-
-Requiere Node.js 22+, Git configurado y GitHub Copilot CLI. Spec Kit necesita también Python y uv.
+**Requisitos:** Node.js 22+ y npm. Los comandos siguientes se ejecutan desde la raíz del repo.
 
 ```bash
 git clone https://github.com/davidop/tajamar-game-of-prompts.git
 cd tajamar-game-of-prompts
 npm run check
-npm run doctor
 
-# David
-npm run setup -- --framework gsd --name david-gsd
-
-# Jorge, en su propia máquina
-npm run setup -- --framework spec-kit --name jorge-speckit
+# David — GSD Core
+npm ci --prefix workspaces/david-gsd
+npm run test:gsd
+npm --prefix workspaces/david-gsd run build
+npm --prefix workspaces/david-gsd run dev
 ```
 
-Cada workspace contiene su **propio repositorio Git**, independiente de la rama `main` del kit. El código generado se guarda en `workspaces/`, que está ignorado en el repositorio público.
+Para mostrar la versión de Jorge, detén el servidor anterior y ejecuta:
 
-## 🛡️ Material reservado
+```bash
+npm ci --prefix workspaces/jorge-speckit
+npm run test:speckit
+npm --prefix workspaces/jorge-speckit run build
+npm --prefix workspaces/jorge-speckit run dev
+```
 
-El cambio funcional que se introduce en la demo se distribuye por separado entre los ponentes. **No subir soluciones completas ni el cambio sorpresa al repositorio público**. Las implementaciones de ensayo pueden conservarse en local o en repositorios privados separados.
+Las dos apps usan `http://127.0.0.1:5173`; **solo una puede estar levantada a la vez en el mismo equipo**.
 
-## 📚 Referencias
+### Pruebas de aceptación reales (Playwright)
 
-- [GitHub Spec Kit](https://github.com/github/spec-kit) · [Integración Copilot](https://github.github.com/spec-kit/integrations/copilot.html)
-- [GSD Core](https://github.com/open-gsd/gsd-core)
-- [GitHub Copilot CLI](https://docs.github.com/es/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli)
+```bash
+npm ci --prefix evaluation
+cd evaluation
+npx playwright install chromium
+# Playwright arranca Vite automáticamente y lo detiene al terminar:
+npm test
+```
 
-Código y documentación propios bajo [MIT](LICENSE). Sesión independiente, sin afiliación con los proyectos anteriores.
+Por defecto prueba **GSD Core**. Para probar **Spec Kit**, desde PowerShell:
+
+```powershell
+$env:TASKFORGE_WORKSPACE="workspaces/jorge-speckit"
+npm test
+```
+
+En GitHub Actions se prueban **las dos implementaciones por separado**. Un badge verde solo representa los checks efectivamente ejecutados en la última ejecución, no un benchmark científico.
+
+## 🛡️ Ensayar con Git independiente y sin tocar main
+
+Los dos directorios de `workspaces/` son **snapshots versionados** para enseñar el resultado, no repositorios Git anidados. Para ejecutar GSD o Spec Kit y crear commits durante la demo, usa copias aisladas:
+
+```bash
+npm run demo:prepare
+cd demos/david-gsd
+git rev-parse --show-toplevel
+npm ci
+npm run dev
+```
+
+Se crean `demos/david-gsd` y `demos/jorge-speckit`, cada uno con **su propio Git y un commit inicial**. La operación no sobrescribe copias existentes. **No recupera el historial original de commits del ensayo**; el historial de fases de GSD está documentado en `.planning/`. Los directorios `demos/` están ignorados por Git.
+
+Para **empezar desde el starter vacío** en lugar de usar las implementaciones completas, utiliza `npm run setup -- --framework gsd --name nuevo-gsd` o `--framework spec-kit --name nuevo-speckit`. Usa nombres nuevos: los snapshots publicados ya ocupan `david-gsd` y `jorge-speckit`.
+
+## 📚 Artefactos y trazabilidad
+
+- [GSD · planificación y auditoría del milestone v1.0](workspaces/david-gsd/.planning/milestones/v1.0-MILESTONE-AUDIT.md).
+- [Spec Kit · especificación, plan y tareas](workspaces/jorge-speckit/specs/001-taskforge-mvp/).
+- [Guía de David](docs/14-ensayo-david-gsd.md) y [guía de Jorge](docs/15-ensayo-jorge-speckit.md).
+- [Preparación conjunta y protocolo de ensayo](docs/13-ensayo-ponentes.md).
+
+**Material reservado:** el texto y las pruebas del cambio sorpresa se comparten entre ponentes **fuera del repositorio público**. No subirlos antes de la sesión.
+
+**Referencias:** [GitHub Spec Kit](https://github.com/github/spec-kit) · [GSD Core](https://github.com/open-gsd/gsd-core) · [GitHub Copilot CLI](https://docs.github.com/es/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli).
+
+Contenido propio bajo [MIT](LICENSE). Sesión independiente de los proyectos citados.
