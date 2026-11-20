@@ -33,6 +33,13 @@ Cada ejecución guarda `taskforge-showcase.png` bajo `evaluation/test-results/` 
 
 **GitHub Pages:** [abrir dashboard publicado](https://davidop.github.io/tajamar-game-of-prompts/) · [workflow de despliegue](https://github.com/davidop/tajamar-game-of-prompts/actions/runs/44721641477). La accesibilidad de la URL pública debe comprobarse desde un navegador; un workflow correcto por sí solo no la garantiza.
 
+
+### Capturas reales de ambas aplicaciones
+
+![GSD Core TaskForge real Playwright screenshot](assets/screenshots/gsd-core.png)
+
+![Spec Kit TaskForge real Playwright screenshot](assets/screenshots/spec-kit.png)
+
 ## 👥 Conoce a los ponentes
 
 | Ponente | Metodología | Perfil profesional |

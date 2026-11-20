@@ -28,6 +28,13 @@ Game of Prompts is an open, reproducible comparison of **GitHub Spec Kit** and *
 
 [Reference run](https://github.com/davidop/tajamar-game-of-prompts/actions/runs/44709353375). Unit test totals **cannot be compared directly** because the suites have different scope. This is a case study, **not a scientific benchmark**.
 
+
+### Real screenshots of both applications
+
+![GSD Core TaskForge real Playwright screenshot](assets/screenshots/gsd-core.png)
+
+![Spec Kit TaskForge real Playwright screenshot](assets/screenshots/spec-kit.png)
+
 ## Run the apps
 
 Requirements: Git, Node.js 22+ and npm.
