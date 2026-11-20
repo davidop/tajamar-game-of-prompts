@@ -6,6 +6,7 @@ node_modules/
 **/.vite/
 workspaces/*
 !workspaces/jorge-speckit/
+!workspaces/david-gsd/
 playwright-report/
 test-results/
 *.log
