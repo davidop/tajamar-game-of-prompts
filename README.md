@@ -27,6 +27,16 @@
 
 **Abrir la presentación:** descarga o clona el repositorio y abre `presentation/index.html` en un navegador; usa ← y →. [Ver código de la presentación](presentation/index.html).
 
+## ✅ Resultados verificados en GitHub Actions
+
+| Comprobación | Spec Kit (Jorge) | GSD Core (David) |
+| --- | ---: | ---: |
+| Tests unitarios | **10/10** | **63/63** |
+| Build Vite | **PASS** | **PASS** |
+| Playwright E2E (PRD RF01–RF07) | **9/9** | **9/9** |
+
+**Fuente:** [ejecución real del 20/11/2026, cinco jobs correctos](https://github.com/davidop/tajamar-game-of-prompts/actions/runs/44709043567). Los recuentos de tests unitarios **no son una métrica de calidad comparable por sí sola**: las suites tienen distinto alcance y granularidad. Consulta siempre el [estado de CI más reciente](https://github.com/davidop/tajamar-game-of-prompts/actions/workflows/quality.yml).
+
 ## 🗓️ Agenda de 120 minutos
 
 | Minutos | Contenido | Ponente |

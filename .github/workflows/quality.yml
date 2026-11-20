@@ -25,6 +25,15 @@ jobs:
       - name: Build starter
         working-directory: starter
         run: npm run build
+      - name: Validate isolated demo Git roots
+        run: |
+          git config --global user.name "Game of Prompts CI"
+          git config --global user.email "ci@example.invalid"
+          npm run demo:prepare
+          test -d demos/david-gsd/.git
+          test -d demos/jorge-speckit/.git
+          test "$(git -C demos/david-gsd rev-parse --show-toplevel)" = "$PWD/demos/david-gsd"
+          test "$(git -C demos/jorge-speckit rev-parse --show-toplevel)" = "$PWD/demos/jorge-speckit"
       - name: Validate Playwright syntax
         run: |
           node --check evaluation/acceptance.spec.js
