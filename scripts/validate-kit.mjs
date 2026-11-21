@@ -19,21 +19,21 @@ for (const readme of ['README.md','README.en.md']) {
 // Check local Markdown targets in both entrypoints (including image references).
 for (const readme of ['README.md', 'README.en.md']) {
   const body = fs.readFileSync(path.join(root, readme), 'utf8');
-  const linkPattern = /!?\\[[^\\]]*\\]\\(([^)]+)\\)/g;
+  const linkPattern = /!?\[[^\]]*\]\(([^)]+)\)/g;
   for (const match of body.matchAll(linkPattern)) {
     const target = match[1].split('#')[0].trim();
     if (!target || /^(https?:|mailto:|#)/i.test(target)) continue;
     const decoded = decodeURIComponent(target);
     const full = path.resolve(root, decoded);
     if (!full.startsWith(root + path.sep) || !fs.existsSync(full)) {
-      errors.push(\`Enlace local roto en \${readme}: \${target}\`);
+      errors.push(`Enlace local roto en ${readme}: ${target}`);
     }
   }
 }
 // The public dashboard bundles images from the same source evidence in Pages CI.
 const dashboard = fs.readFileSync(path.join(root, 'dashboard/index.html'), 'utf8');
 for (const image of ['screenshots/gsd-core.png', 'screenshots/spec-kit.png']) {
-  if (!dashboard.includes(image)) errors.push(\`Dashboard sin captura: \${image}\`);
+  if (!dashboard.includes(image)) errors.push(`Dashboard sin captura: ${image}`);
 }
 
 const required = ['README.md','LICENSE','starter/package.json','starter/index.html','starter/src/main.js','docs/02-documento-funcional.md','docs/10-ruta-speckit.md','docs/11-ruta-gsd.md','evaluation/acceptance.spec.js','results/scoreboard.html','presentation/index.html','.github/workflows/quality.yml'];
