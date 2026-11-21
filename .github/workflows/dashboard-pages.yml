@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'dashboard/**'
+      - 'assets/screenshots/**'
       - '.github/workflows/dashboard-pages.yml'
   workflow_dispatch:
 permissions:
@@ -26,6 +27,13 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: true
+      - name: Include verified Playwright screenshots in published site
+        run: |
+          mkdir -p dashboard/screenshots
+          cp assets/screenshots/gsd-core.png dashboard/screenshots/gsd-core.png
+          cp assets/screenshots/spec-kit.png dashboard/screenshots/spec-kit.png
+          test -s dashboard/screenshots/gsd-core.png
+          test -s dashboard/screenshots/spec-kit.png
       - name: Upload dashboard
         uses: actions/upload-pages-artifact@v3
         with:
