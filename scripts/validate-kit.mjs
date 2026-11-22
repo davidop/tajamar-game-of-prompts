@@ -4,12 +4,20 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 let errors=[];
 // Evidence must be committed as actual PNG files, not broken or placeholder links.
+const screenshotDigests = new Set();
 for (const name of ['gsd-core.png', 'spec-kit.png']) {
   const relative = `assets/screenshots/${name}`;
   const full = path.join(root, relative);
   if (!fs.existsSync(full)) { errors.push(`Falta captura real: ${relative}`); continue; }
   const bytes = fs.readFileSync(full);
   if (bytes.length < 1000 || !bytes.subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10]))) errors.push(`PNG inválido: ${relative}`);
+  else {
+    const width = bytes.readUInt32BE(16), height = bytes.readUInt32BE(20);
+    if (width < 640 || height < 400) errors.push(`Captura demasiado pequeña: ${relative} (${width}x${height})`);
+    const digest = (await import('node:crypto')).createHash('sha256').update(bytes).digest('hex');
+    if (screenshotDigests.has(digest)) errors.push(`Capturas idénticas: ${relative}`);
+    screenshotDigests.add(digest);
+  }
 }
 for (const readme of ['README.md','README.en.md']) {
   const body = fs.readFileSync(path.join(root,readme),'utf8');
